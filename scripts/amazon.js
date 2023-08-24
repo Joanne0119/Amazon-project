@@ -42,7 +42,7 @@ products.forEach((product) => {
 
     <div class="product-spacer"></div>
 
-    <div class="added-to-cart">
+    <div class="added-to-cart js-added-to-cart-${product.id}">
       <img src="images/icons/checkmark.png">
       Added
     </div>
@@ -55,11 +55,34 @@ products.forEach((product) => {
 
 document.querySelector('.js-product-grid').innerHTML = productHTML;
 
+let addedTimeIds = {};
+//have two timeout ids
+//one is to make sure this product be called or not
+//the other is to clear the timeout
+
 document.querySelectorAll('.js-add-to-cart-btn')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const {productId} = button.dataset;
+      console.log(productId);
+
       const quantity = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+      
+      const addedToCart = document.querySelector(`.js-added-to-cart-${productId}`)
+      addedToCart.classList.add('added-to-cart-visable');
+
+      setTimeout(() => {
+        const previousTimeoutId = addedTimeIds[productId];
+        if(previousTimeoutId){
+          clearTimeout(previousTimeoutId);
+        }
+    
+        const timeoutId = setTimeout(() => {
+          addedToCart.classList.remove('added-to-cart-visable'); 
+        }, 2000);
+
+        addedTimeIds[productId] = timeoutId;
+      });
 
       let matchingItem;
       
