@@ -1,5 +1,5 @@
-import { cart } from "../data/cart";
-import { products } from "../data/products";
+import { cart } from "../data/cart.js";
+import { products } from "../data/products.js";
 
 let cartSummaryHTML = '';
 
@@ -16,6 +16,9 @@ cart.forEach((cartItem) => {
     }
   });
 
+  console.log(matchingProduct);
+  console.log(cartItem);
+
   cartSummaryHTML +=  `
     <div class="cart-item-container">
       <div class="delivery-date">
@@ -31,7 +34,7 @@ cart.forEach((cartItem) => {
             ${matchingProduct.name}
           </div>
           <div class="product-price">
-            $${matchingProduct.priceCents / 100}
+            $${(matchingProduct.priceCents / 100).toFixed(2)}
           </div>
           <div class="product-quantity">
             <span>
