@@ -93,6 +93,8 @@ function updateCartQuantity()
     .innerHTML = cartQuantity;
 }
 
+updateCartQuantity();
+
 document.querySelectorAll('.js-add-to-cart-btn')
   .forEach((button) => {
     button.addEventListener('click', () => {
