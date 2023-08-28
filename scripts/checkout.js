@@ -110,5 +110,26 @@ document.querySelectorAll('.js-delete-link')
 
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
-    })
-  })
+      Checkout();
+    });
+  });
+  
+Checkout();
+
+function Checkout()
+{
+  const returnHomeLink = document.querySelector('.js-return-to-home-link');
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  if(cartQuantity < 2)
+  {
+    returnHomeLink.innerHTML = `${cartQuantity} item`; 
+    
+  } 
+  else {
+    returnHomeLink.innerHTML = `${cartQuantity} items`; 
+  }
+}
