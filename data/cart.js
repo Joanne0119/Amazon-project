@@ -73,3 +73,19 @@ export function updateQuantity(productId, newQuantity)
   });
   saveToStorage();
 }
+
+export function updateDeliveryOption(productId, deliveryOptionId){
+  let matchingItem;
+  
+  cart.forEach((cartItem) => {
+    if(productId === cartItem.productId)
+    {
+      matchingItem = cartItem;
+    }
+    console.log(cartItem);
+    console.log(matchingItem);
+  });
+  matchingItem.deliveryOptionsId = deliveryOptionId;
+  saveToStorage();
+  console.log(cart);
+}
